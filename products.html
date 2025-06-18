@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Products - 3D Prints</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .product-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      padding: 20px;
+    }
+
+    .product {
+      background-color: #fff;
+      border: 1px solid #ccc;
+      padding: 10px;
+      text-align: center;
+      border-radius: 8px;
+    }
+
+    .product img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .modal-content {
+      background-color: #fff;
+      margin: 100px auto;
+      padding: 20px;
+      width: 300px;
+      border-radius: 5px;
+    }
+
+    .close {
+      float: right;
+      cursor: pointer;
+      font-size: 20px;
+      color: red;
+    }
+
+    .modal.show {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Our Products</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="products.html">Products</a>
+      <a href="quote.html">Quote</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="cart.html">Cart 🛒</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="product-list" id="productList">
+      <!-- JS will render products -->
+    </section>
+  </main>
+
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <span onclick="closeModal()" class="close">&times;</span>
+      <h2 id="modalTitle">Add Product</h2>
+      <p id="modalPrice"></p>
+      <label>Quantity: <input type="number" id="quantity" min="1" value="1"></label><br><br>
+      <label>Size:
+        <select id="size">
+          <option value="small">Small</option>
+          <option value="medium">Medium</option>
+          <option value="large">Large</option>
+        </select>
+      </label><br><br>
+      <button onclick="addToCart()">Confirm</button>
+    </div>
+  </div>
+
+  <script src="js/products.js"></script>
+    <footer>
+  <p>&copy; 2025 Sanj Corp 3D  Bolivia. All rights reserved.</p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Request a Quote - 3D Prints</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <header>
+    <h1>Request a Custom Quote</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="products.html">Products</a>
+      <a href="quote.html">Quote</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+  <main>
+    <section>
+      <form id="quoteForm">
+        <label for="fullname">Full Name:</label>
+        <input type="text" id="fullname" name="fullname" required />
+        <label for="email">Email Address:</label>
+        <input type="email" id="email" name="email" required />
+        <label for="phone">Phone Number:</label>
+        <input type="tel" id="phone" name="phone" required />
+        <label for="material">Material Type:</label>
+        <select id="material" name="material" required>
+          <option value="">-- Select Material --</option>
+          <option value="PLA">PLA</option>
+          <option value="ABS">ABS</option>
+          <option value="PETG">PETG</option>
+        </select>
+        <label for="quantity">Quantity:</label>
+        <input type="number" id="quantity" name="quantity" min="1" required />
+        <label for="file">Upload Your 3D File:</label>
+        <input type="file" id="file" name="file" accept=".stl,.obj" required />
+        <label for="notes">Additional Notes:</label>
+        <textarea id="notes" name="notes" rows="4"></textarea>
+        <button type="submit">Submit Request</button>
+      </form>
+      <p id="confirmation" style="color: green; display: none;">Quote request submitted!</p>
+    </section>
+  </main>
+  <footer>
+  <p>&copy; 2025 Sanj Corp 3D  Bolivia. All rights reserved.</p>
+</footer>
+  <script src="js/quote.js"></script>
+</body>
+</html>

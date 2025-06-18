@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Shopping Cart - 3D Prints Bolivia</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <style>
+    /* Estilos específicos para el carrito */
+    main {
+      max-width: 900px;
+      margin: 30px auto;
+      padding: 0 20px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+    th, td {
+      padding: 12px;
+      border: 1px solid #ccc;
+      text-align: center;
+    }
+    th {
+      background-color: #3498db;
+      color: white;
+    }
+    img.product-image {
+      max-width: 80px;
+      height: auto;
+      border-radius: 4px;
+    }
+    button.remove-btn {
+      background-color: #e74c3c;
+      color: white;
+      border: none;
+      padding: 6px 10px;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+    button.remove-btn:hover {
+      background-color: #c0392b;
+    }
+    .empty-message {
+      font-size: 18px;
+      font-weight: bold;
+      text-align: center;
+      margin-top: 40px;
+    }
+    .total-container {
+      text-align: right;
+      font-size: 20px;
+      font-weight: bold;
+    }
+    .actions {
+      text-align: right;
+      margin-top: 20px;
+    }
+    .actions button {
+      background-color: #3498db;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      cursor: pointer;
+      border-radius: 4px;
+      font-weight: bold;
+      margin-left: 10px;
+    }
+    .actions button:hover {
+      background-color: #2980b9;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Your Shopping Cart</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="products.html">Products</a>
+      <a href="quote.html">Quote</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="cart.html">Cart 🛒</a>
+    </nav>
+  </header>
+
+  <main>
+    <div id="cartContainer"></div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Impresiones 3D Bolivia. All rights reserved.</p>
+  </footer>
+
+  <script>
+    function loadCart() {
+      const cartContainer = document.getElementById('cartContainer');
+      const cart = JSON.parse(localStorage.getItem('cartProducts') || '[]');
+
+      if (cart.length === 0) {
+        cartContainer.innerHTML = '<p class="empty-message">Your cart is empty.</p>';
+        return;
+      }
+
+      let tableHTML = `
+        <table>
+          <thead>
+            <tr>
+              <th>Image</th>
+              <th>Product</th>
+              <th>Size</th>
+              <th>Quantity</th>
+              <th>Price (USD)</th>
+              <th>Subtotal (USD)</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+      `;
+
+      let total = 0;
+      cart.forEach((item, index) => {
+        const subtotal = item.price * item.quantity;
+        total += subtotal;
+        tableHTML += `
+          <tr>
+            <td><img src="${item.img}" alt="${item.name}" class="product-image" /></td>
+            <td>${item.name}</td>
+            <td>${item.size}</td>
+            <td>${item.quantity}</td>
+            <td>$${item.price.toFixed(2)}</td>
+            <td>$${subtotal.toFixed(2)}</td>
+            <td><button class="remove-btn" onclick="removeItem(${index})">Remove</button></td>
+          </tr>
+        `;
+      });
+
+      tableHTML += `
+          </tbody>
+        </table>
+        <div class="total-container">Total: $${total.toFixed(2)}</div>
+        <div class="actions">
+          <button onclick="clearCart()">Clear Cart</button>
+          <button onclick="checkout()">Checkout</button>
+        </div>
+      `;
+
+      cartContainer.innerHTML = tableHTML;
+    }
+
+    function removeItem(index) {
+      let cart = JSON.parse(localStorage.getItem('cartProducts') || '[]');
+      cart.splice(index, 1);
+      localStorage.setItem('cartProducts', JSON.stringify(cart));
+      loadCart();
+    }
+
+    function clearCart() {
+      if(confirm("Are you sure you want to clear the entire cart?")) {
+        localStorage.removeItem('cartProducts');
+        loadCart();
+      }
+    }
+
+    function checkout() {
+      alert('Thank you for your purchase! This is a demo, so no actual payment is processed.');
+      localStorage.removeItem('cartProducts');
+      loadCart();
+    }
+
+    window.onload = loadCart;
+  </script>
+</body>
+</html>
